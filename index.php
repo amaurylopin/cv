@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr" class="no-js">
 
+
     <!-- Head, Header, menu … -->
 <?php
+    include 'src/gtag.php';
     include 'src/header.php';
 ?>
     <!-- Fin Head, Header, menu … -->
