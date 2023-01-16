@@ -57,7 +57,7 @@
                 <a class="pt-trigger" href="#cv" data-animation="62">CV</a>
               </li>
               <li>
-                <a class="pt-trigger" href="tel:+33662705582" target="_blank" data-animation="62">06 62 70 55 82</a>
+                <a class="pt-trigger" href="#" target="_blank" data-animation="62">06 62 70 55 82</a>
               </li>
             </ul>
             <!-- /Main menu -->
