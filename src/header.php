@@ -57,9 +57,6 @@
                 <a class="pt-trigger" href="#cv" data-animation="62">CV</a>
               </li>
               <li>
-                <a class="pt-trigger" href="http://lopin.io/cv-amaury-lopin.pdf" target="_blank" data-animation="62">Télécharger mon CV</a>
-              </li>
-              <li>
                 <a class="pt-trigger" href="tel:+33662705582" target="_blank" data-animation="62">06 62 70 55 82</a>
               </li>
             </ul>
