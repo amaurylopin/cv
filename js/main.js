@@ -1,5 +1,5 @@
 /*
-* Template Name: PRO Card - Material Resume / CV / vCard Template
+* Template Name: Unique - Responsive vCard Template
 * Author: lmpixels
 * Author URL: http://themeforest.net/user/lmpixels
 * Version: 1.0
@@ -7,11 +7,6 @@
 
 (function($) {
 "use strict";
-    // Subpages resize
-    function subpages_resize() {
-        var subpagesHeight = $('.pt-page-current').height();
-        $(".subpages").height(subpagesHeight + 50);
-    }
     
     // Portfolio subpage filters
     function portfolio_init() {
@@ -36,9 +31,6 @@
                 $('#portfolio_filters .filter').parent().removeClass('active');
                 $(this).parent().addClass('active');
                 portfolio_grid.shuffle('shuffle', $(this).attr('data-group') );
-                setTimeout(function(){
-                    subpages_resize();
-                }, 500);
             });
 
         }
@@ -84,6 +76,27 @@
         }
     }
     // /Hide Mobile menu
+    
+    // Custom scroll
+    function customScroll() {
+        var windowWidth = $(window).width();
+        if (windowWidth > 991) {
+            // Custom Subpage Scroll
+            $(".pt-page").mCustomScrollbar({
+                scrollInertia: 8
+            });
+
+            // Custom Header Scroll
+            $("#site_header").mCustomScrollbar({
+                scrollInertia: 8
+            });
+        } else {
+            $(".pt-page").mCustomScrollbar('destroy');
+
+            $("#site_header").mCustomScrollbar('destroy');
+        }
+    }
+    // /Custom scroll
 
     //On Window load & Resize
     $(window)
@@ -98,26 +111,20 @@
                     menu: 'ul.site-main-menu',
                 });
             }
+
+            customScroll();
         })
         .on('resize', function() { //Resize
-             mobileMenuHide();
-
-             setTimeout(function(){
-                subpages_resize();
-            }, 500);
-        })
-        .scroll(function () {
-            if ($(window).scrollTop() < 20) {
-                $('.header').removeClass('sticked');
-            } else {
-                $('.header').addClass('sticked');
-            }
-        })
-        .scrollTop(0);
+            mobileMenuHide();
+             
+            customScroll();
+        });
 
 
     // On Document Load
     $(document).on('ready', function() {
+
+
         // Initialize Portfolio grid
         var $portfolio_container = $("#portfolio-grid");
 
@@ -128,13 +135,7 @@
         });
 
         // Portfolio hover effect init
-        $(' #portfolio_grid > figure ').each( function() { $(this).hoverdir(); } );
-
-        // Blog grid init
-        setTimeout(function(){
-            var $container = $(".blog-masonry");
-            $container.masonry();
-        }, 500);
+        $(' #portfolio_grid > figure > a ').each( function() { $(this).hoverdir(); } );
 
         // Mobile menu
         $('.menu-toggle').on("click", function () {
@@ -146,18 +147,13 @@
             mobileMenuHide();
         });
 
-        // Sidebar toggle
-        $('.sidebar-toggle').on("click", function () {
-            $('#blog-sidebar').toggleClass('open');
-        });
-
-        /* Testimonials Slider
+        // Testimonials Slider
         $(".testimonials.owl-carousel").owlCarousel({
             nav: true, // Show next/prev buttons.
             items: 3, // The number of items you want to see on the screen.
             loop: false, // Infinity loop. Duplicate last and first items to get loop illusion.
             navText: false,
-            margin: 25,
+            margin: 10,
             responsive : {
                 // breakpoint from 0 up
                 0 : {
@@ -172,18 +168,17 @@
                     items: 2,
                 },
                 1200 : {
-                    items: 2,
+                    items: 3,
                 }
             }
         });
-
 
         // Text rotation
         $('.text-rotation').owlCarousel({
             loop: true,
             dots: false,
             nav: false,
-            margin: 0,
+            margin: 10,
             items: 1,
             autoplay: true,
             autoplayHoverPause: false,
@@ -191,10 +186,9 @@
             animateOut: 'zoomOut',
             animateIn: 'zoomIn'
         });
-*/
+
         // Lightbox init
-        $('body').magnificPopup({
-            delegate: 'a.lightbox',
+        $('.lightbox').magnificPopup({
             type: 'image',
             removalDelay: 300,
 
@@ -220,12 +214,12 @@
                     youtube: {
                       index: 'youtube.com/', // String that detects type of video (in this case YouTube). Simply via url.indexOf(index).
 
-                      id: null, // String that splits URL in a two parts, second part should be %id%
+                      id: 'v=', // String that splits URL in a two parts, second part should be %id%
                       // Or null - full URL will be returned
                       // Or a function that should return %id%, for example:
                       // id: function(url) { return 'parsed id'; }
 
-                      src: '%id%?autoplay=1' // URL that will be set as a source for iframe.
+                      src: '//www.youtube.com/embed/%id%?autoplay=1' // URL that will be set as a source for iframe.
                     },
                     vimeo: {
                       index: 'vimeo.com/',
@@ -257,23 +251,10 @@
             },
         });
 
-        //Form Controls
-        $('.form-control')
-            .val('')
-            .on("focusin", function(){
-                $(this).parent('.form-group').addClass('form-group-focus');
-            })
-            .on("focusout", function(){
-                if($(this).val().length === 0) {
-                    $(this).parent('.form-group').removeClass('form-group-focus');
-                }
-            });
+        $('.tilt-effect').tilt({
 
-       /* //Google Maps
-        $("#map").googleMap();
-        $("#map").addMarker({
-            address: "15 avenue des champs Elysées 75008 Paris" // Your Address
-        });*/
+        });
+
     });
 
 })(jQuery);

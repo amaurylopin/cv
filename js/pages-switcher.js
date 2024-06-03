@@ -1,5 +1,5 @@
 /*
-* Template Name: PRO Card - Material Resume / CV / vCard Template
+* Template Name: Unique - Responsive vCard Template
 * Author: lmpixels
 * Author URL: http://themeforest.net/user/lmpixels
 * Version: 1.0
@@ -12,7 +12,6 @@ var PageTransitions = (function ($, options) {
         isAnimating = false,
         endCurrentPage = true,
         endNextPage = false,
-        windowArea = $(window),
         animEndEventNames = {
             'WebkitAnimation'   : 'webkitAnimationEnd',
             'OAnimation'        : 'oAnimationEnd',
@@ -80,7 +79,7 @@ var PageTransitions = (function ($, options) {
 
         Animate(menuLink);
 
-        $('body').append('<div id="page-ajax-loaded" class="page-ajax-loaded animated rotateInDownRight"></div>');
+        sectionsContainer.append('<div id="page-ajax-loaded" class="page-ajax-loaded animated rotateInDownRight"></div>');
         ajaxLoader();
     }
 
@@ -115,12 +114,10 @@ var PageTransitions = (function ($, options) {
         function showContent() {
             ajaxLoadedContent.removeClass('rotateOutDownRight closed');
             ajaxLoadedContent.show();
-            $('body').addClass('ajax-page-visible');
         }
 
         function hideContent() {
             $('#page-ajax-loaded').addClass('rotateOutDownRight closed');
-            $('body').removeClass('ajax-page-visible');
             setTimeout(function(){
                 $('#page-ajax-loaded.closed').html('');
                 ajaxLoadedContent.hide();
@@ -156,7 +153,7 @@ var PageTransitions = (function ($, options) {
 
         // Checking for 'data-animation' attribute.
         if (!($pageTrigger.attr('data-animation'))) {
-            var animNumber = parseInt(Math.floor(Math.random() * 67) + 1);
+            var animNumber = parseInt(Math.floor(Math.random() * 67));
             $pageTrigger.data('animation',animNumber);
         }
 
@@ -474,10 +471,6 @@ var PageTransitions = (function ($, options) {
 
                 var $nextPage = $('section[data-id='+currentPageId+']').addClass('pt-page-current');
 
-                windowArea.scrollTop(0);
-                var subpagesHeight = windowArea.height();
-                $(".subpages").height(subpagesHeight + 50); //50 is the bottom margin value of the pt-page, in the main.css file
-
                 $currentPage.addClass(outClass).on(animEndEventName, function() {
                     $currentPage.off(animEndEventName);
                     endCurrentPage = true;
@@ -511,8 +504,6 @@ var PageTransitions = (function ($, options) {
     }
 
     function onEndAnimation($pageWrapper, $nextPage, $currentPage) {
-        var subpagesHeight = $nextPage.height();
-        $(".subpages").height(subpagesHeight + 50); //50 is the bottom margin value of the pt-page, in the main.css file
         resetPage($nextPage, $currentPage);
     }
 
